@@ -1,28 +1,28 @@
-import { Entity } from "./models/entity";
-import { System } from "./models/system"
-import { Display } from "./display/display";
-import { CollidingSpheresOffset } from "./examples/sphere_collision_offset"
-import { handleCollisions } from "./engine/collisions"
+// import { Entity } from "./models/entity";
+// import { System } from "./models/system"
+// import { Display } from "./display/display";
+// import { CollidingSpheresOffset } from "./examples/sphere_collision_offset"
+// import { handleCollisions } from "./engine/collisions"
 
-let system = CollidingSpheresOffset()
-// system.addEntity(entity)
-// system.addEntity(entity2)
+// let system = CollidingSpheresOffset()
+// // system.addEntity(entity)
+// // system.addEntity(entity2)
 
 
-let fps = 30
-let speedup = 1.1
+// let fps = 30
+// let speedup = 1.1
 
-let d = new Display()
-let lastTick = new Date()
-let timer = setInterval(() => {
-    let delta = new Date().getTime() - lastTick.getTime()
-    lastTick = new Date()
+// let d = new Display()
+// let lastTick = new Date()
+// let timer = setInterval(() => {
+//     let delta = new Date().getTime() - lastTick.getTime()
+//     lastTick = new Date()
 
-    system.tick(speedup * 1000 / fps)
-    handleCollisions(system)
+//     system.tick(speedup * 1000 / fps)
+//     handleCollisions(system)
 
-    d.render(system)
+//     d.render(system)
 
-    // clearInterval(timer)
+//     // clearInterval(timer)
 
-}, 1000 / fps)
+// }, 1000 / fps)

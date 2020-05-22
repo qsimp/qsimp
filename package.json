@@ -4,7 +4,7 @@
   "description": "Physics Simulator",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
+    "test": "mocha tests --recursive",
     "start": "webpack-dev-server --mode development"
   },
   "repository": {
@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/c0nrad/psim#readme",
   "dependencies": {
+    "@types/mathjs": "^6.0.5",
+    "mathjs": "^7.0.0",
     "mustache": "^4.0.1",
     "three": "^0.116.1",
     "ts-loader": "^7.0.4",
@@ -28,6 +30,9 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
+    "@types/expect": "^24.3.0",
+    "@types/mocha": "^7.0.2",
+    "ts-mocha": "^7.0.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"

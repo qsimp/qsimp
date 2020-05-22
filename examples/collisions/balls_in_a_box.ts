@@ -1,7 +1,7 @@
-import { System } from "../models/system"
-import { Entity, SphereEntity, BoxEntity } from "../models/entity"
-import { Vector3 } from "../models/vector3";
-import { GravityForce } from "../models/force"
+import { System } from "../../models/system"
+import { Entity, SphereEntity, BoxEntity } from "../../models/entity"
+import { Vector3 } from "../../models/vector3";
+import { GravityForce } from "../../models/force"
 
 export function BuildBouncySystem(): System {
     let system = new System()
