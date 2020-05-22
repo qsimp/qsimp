@@ -6,163 +6,112 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-<body>
-    <div class="container">
-        <h1>Quantum Infinite Square Well</h1>
+<body class="container-fluid">
 
-        <div class="row p-0 m-0" style="border: 1px solid">
-            <div class="col-md-9">
-                <canvas id="chartCanvas"></canvas>
+    <div class="row p-0 m-0">
+        <h1>Quantum Infinite Well</h1>
+        <div class="col-md-9">
+            <canvas id="chartCanvas"></canvas>
+
+
+            <table class="table">
+                <tr>
+                    <td> n </td>
+                    <td> E (meV) </td>
+
+                    <th> \( \langle x \rangle \) </th>
+                    <th> \( \langle x^2 \rangle \) </th>
+                    <th> \( \langle p \rangle \) </th>
+                    <th> \( \langle p^2 \rangle \) </th>
+                    <th> \( \sigma_x^2 \) </th>
+                    <th> \( \sigma_p^2 \) </th>
+                    <th> \( \sigma_x \sigma_p ( \frac{\hbar}{2} ) \) </th>
+
+                </tr>
+
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="col-md-3">
+            <h4>Simulation Options</h4>
+            <div>
+                <label>\( a \) = <span id="aValue">10</span>nm</label><br>
+                </td>
+                </tr><input type="range" style="width: 100%" min="1" max="100" value="10" class="slider" id="aInput">
             </div>
 
-            <div class="col-md-3">
-                <div>
-                    <label>\( a \) = <span id="aValue">10</span>nm</label>
+            <div>
+                <label>\( m_e \) = <span id="mValue">91.09</span>E-32 kg</label><br>
+                </td>
+                </tr><input type="range" style="width: 100%" min="1" max="200" value="91.093" class="slider"
+                    id="mInput">
+            </div>
 
-                    <input type="range" min="1" max="100" value="10" class="slider" id="aInput">
+            <div>
+                <label>\( n_{max} \) = <span id="nValue">5</span></label><br>
+                </td>
+                </tr><input type="range" style="width: 100%" min="1" max="10" value="5" class="slider" id="nInput">
+            </div>
 
-                    <!-- <input id="aInput" type="number" value=1> -->
+            <div class="form-check">
+                <input id="singleState" type="checkbox" class="form-check-input">
+                <label for="exampleCheck1">Single Stationary State</label>
+            </div>
+
+            <!-- <div>
+                    <label>Initial Function</label>
+                    <select>
+                        <option>None</option>
+                        <option> Ax(a-x) </option>
+                    </select>
                 </div>
+ -->
+            <h4>Chart Sample Options</h4>
 
-                <!-- <div>
+            <div>
+                <label>\( \Delta t \) = <span id="dtValue">10</span>E-15 s</label><br>
+                </td>
+                </tr><input type="range" style="width: 100%" min="1" max="1000" value="100" class="slider" id="dtInput">
+            </div>
+
+            <div>
+                <label>Sample Count = <span id="sampleCountValue">50</span></label><br>
+                </td>
+                </tr><input type="range" style="width: 100%" min="1" max="100" value="50" class="slider"
+                    id="sampleCountInput">
+            </div>
+
+            <div>
+                <label>FPS = <span id="fpsValue">10</span></label><br>
+                </td>
+                </tr><input type="range" style="width: 100%" min="1" max="60" value="10" class="slider" id="fpsInput">
+            </div>
+
+
+            <!-- <div>
 
                     <label>\( n \) = <span id="lambdaValue">5</span></label>
 
-                    <input type="range" min="1" max="10" value="5" step="1" class="slider" id="nInput">
+                    </td></tr><input type="range" style="width: 100%" min="1" max="10" value="5" step="1" class="slider" id="nInput">
 
             </div> -->
 
-                <div> \( t = \) <span id="tValue"></span></div>
-                <!-- <div> \( \langle x \rangle = \) <span id="xMeanValue"></span></div>
+            <!-- <div> \( \langle x \rangle = \) <span id="xMeanValue"></span></div>
                 <div> \( \langle x^2 \rangle = \) <span id="x2MeanValue"></span></div>
                 <div> \( \sigma = \) <span id="sigmaValue"></span></div> -->
 
-                <button id="pauseButton">Pause</button>
-            </div>
+            <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
+            <button id="resetButton">Reset</button>
+
+            <div> \( t = \) <span id="tValue"></span></div>
         </div>
-
-        <h4>What is this chart?</h4>
-
-        <p>The above chart is the wave-function solution to the Schrödinger Equation for a particle stuck in a
-            well/hole.
-            The
-            chart shows both the
-            real and imaginary components for the first 5 stationary states given by :</p>
-
-        $$ \Psi (x, t) = \sum_{n=1}^{5} \sqrt{ \frac{2}{a}} \sin{(\frac{n \pi}{a} x )} e^{-i (n^2 \pi^2 \hbar) / (2
-        m
-        a^2 ) t} $$
-
-        <ul>
-            <li> \( \Psi \) is the wavefunction </li>
-            <li> \( n \) is the specific stationary states </li>
-            <li> \( a \) is the width of the well </li>
-            <li> \( x \) is the "position" of the wave within the well </li>
-            <li> \( i \) is an imaginary i (complex number) </li>
-            <li> \( \hbar \) is plank's constant (over 2pi) </li>
-            <li> \( m \) is the mass of the electron </li>
-        </ul>
-
-        <h4>Why is the chart so complex?</h4>
-
-        <p>The chart looks complex because the electron is in a superposition of different possible states (this is
-            common until the particle is measured). Each pair
-            of waves corresponds to one of the states that the particle can be in, both the real and imagine component.
-
-            One of the big insights of quantum mechanics is that when a particle is stuck in a well such as this, it's
-            only allow to
-            have specific amounts of
-            energy.</p>
-
-        <p>But the particle can also be in a super position of those multiple states at the same
-            time. It's not until the particle is measured that it falls into a particular state.</p>
-
-        <h4>Probability State</h4>
-
-        <p>In the above example, all the states have the same probability of occurring, but normally there's a
-            coefficent in front that helps determine the probability of measuring a particle in a particular state. The
-            probability of finding a particle in a particular state is \( |c_n|^2 \):
-        </p>
-
-        $$ \Psi (x, t) = \sum_{n=1}^{\infty} c_n \sqrt{ \frac{2}{a}} \sin{(\frac{n \pi}{a} x )} e^{-i (n^2 \pi^2
-        \hbar)
-        / (2
-        m
-        a^2 ) t} $$
-
-        The different states and energies of our default example wave function ( \( a=10nm \) ) are:
-
-        <table class="table">
-            <tr>
-                <th> n </th>
-                <th> E (J) </th>
-                <th> E (meV) </th>
-            </tr>
-
-            <tr>
-                <td> 1 </td>
-                <td> 6.02e-22 </td>
-                <td> 3.7603 </td>
-            </tr>
-            <tr>
-                <td> 2 </td>
-                <td> 2.41e-21 </td>
-                <td> 15.041 </td>
-            </tr>
-            <tr>
-                <td> 3 </td>
-                <td> 5.42e-21 </td>
-                <td> 33.843 </td>
-            </tr>
-            <tr>
-                <td> 4 </td>
-                <td> 9.64e-21 </td>
-                <td> 60.165 </td>
-            </tr>
-            <tr>
-                <td> 5 </td>
-                <td> 1.51e-20 </td>
-                <td> 94.008 </td>
-            </tr>
-            <tr>
-                <td> 6 </td>
-                <td> 2.17e-20 </td>
-                <td> 135.37 </td>
-            </tr>
-            <tr>
-                <td> 7 </td>
-                <td> 2.95e-20 </td>
-                <td> 184.25 </td>
-            </tr>
-            <tr>
-                <td> 8 </td>
-                <td> 3.86e-20 </td>
-                <td> 240.66 </td>
-            </tr>
-            <tr>
-                <td> 9 </td>
-                <td> 4.88e-20 </td>
-                <td> 304.58 </td>
-            </tr>
-        </table>
-
-        <h4>Expectation Values</h4>
-
-        <p>It's also possible calculate "expectation values" for different properties. These properties could be
-            position \( x \), momentum \( p \) (which is a proxy for velocity.)
-            From those two, you can calculate other quantities such as kinetic energy.</p>
-
-        <p>It's important to remember that the expectation value is the expected value if you were to measure a bunch of
-            similar particles in a similar configuration. </p>
-
-        <p>To calculate the expected position of a particle, we can use the following formula:</p>
-
-        $$ \langle x \rangle = \int_{-\infty}^{\infty} x | \Psi (x,t)|^2 dx $$
-
-        (More coming soon. - May 21st, 2020)
-
-        Made with ♥ by <a href="https://c0nrad.io">.
+        <p>Made with ♥ by <a href="https://blog.c0nrad.io"> blog.c0nrad.io</a>.</p>
     </div>
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
         integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">

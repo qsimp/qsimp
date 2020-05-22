@@ -32,6 +32,34 @@ export class InfiniteSquareWell {
         return math.evaluate("n^2 pi^2 hbar^2 / (2 m a^2)", scope)
     }
 
+    ExpectationX(n: number): number {
+        return this.a / 2
+    }
+
+    ExpectationXSquared(n: number) {
+        return this.a * this.a * ((1 / 3) - (1 / (2 * n * n * Math.PI * Math.PI)))
+    }
+
+    ExpectationP(n: number): number {
+        return 0
+    }
+
+    ExpectationPSquared(n: number): number {
+        return n * n * Math.PI * Math.PI * HBar * HBar / (this.a * this.a)
+    }
+
+    SigmaXSquared(n: number) {
+        return this.ExpectationXSquared(n) - (this.ExpectationX(n) * this.ExpectationX(n))
+    }
+
+    SigmaPSquared(n: number) {
+        return this.ExpectationPSquared(n) - (this.ExpectationP(n) * this.ExpectationP(n))
+    }
+
+    Uncertainty(n: number): number {
+        return Math.sqrt(this.SigmaXSquared(n) * this.SigmaPSquared(n))
+    }
+
     WaveFunctionSolution(n: number, x: number, t: number) {
         if (x < 0 || x > this.a) {
             return 0
