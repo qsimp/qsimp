@@ -22,7 +22,7 @@
   "homepage": "https://github.com/c0nrad/psim#readme",
   "dependencies": {
     "@types/mathjs": "^6.0.5",
-    "mathjs": "^7.0.0",
+    "mathjs": "^7.5.1",
     "mustache": "^4.0.1",
     "three": "^0.116.1",
     "ts-loader": "^7.0.4",
